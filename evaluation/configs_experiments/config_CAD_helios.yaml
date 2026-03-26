@@ -1,0 +1,46 @@
+global:
+  dataset_dir: "../datasets"
+  output_dir: "./results"
+  build_dir: "../build/estimators"
+  
+  save: ["stats"] 
+
+datasets:
+  - name: "CAD_Helios"
+    dir: "dataset_helios"
+    extension: ".pts"
+    
+jobs:
+  
+  - name: "CAD_Helios"
+    executable: "compute_ponca_estimators"
+    
+    static_args:
+      --stats: ""
+      --unsigned-curvature: ""
+      --seed: 1
+      # --abs: ""
+
+    grid:
+      -e: ["3DQuadric", "PC-MLS", "2-Monge", "Varifolds","VarifoldsMeanPlane", "WaveJets", "AvgHexagram", "ShapeOperator", "PCA", "ASO", "APSS", "Sphere", "UnorientedSphere", "Cov2D", "NormCov2D", "NormCov3D", "Mean"]
+      -r: [0.05, 0.075, 0.1, 0.125, 0.15, 0.175, 0.2]
+      --mls-iter: [1]
+      --kernel: ["smooth"]
+    
+    noise_grid:
+      --noise-normal: [0.0, 0.025, 0.05, 0.075, 0.1, 0.15]
+
+  - name: "CAD_Helios"
+    executable: "compute_jetfitting"
+    method_label: "JetFitting"
+
+    static_args:
+      --stats: ""
+      --seed: 1
+      # --abs: ""
+
+    grid:
+      -r: [0.05, 0.075, 0.1, 0.125, 0.15, 0.175, 0.2]
+
+    noise_grid:
+      --noise-normal: [0.0, 0.025, 0.05, 0.075, 0.1, 0.15]

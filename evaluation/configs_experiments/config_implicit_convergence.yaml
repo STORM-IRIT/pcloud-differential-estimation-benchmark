@@ -1,0 +1,47 @@
+global:
+  dataset_dir: "../datasets"
+  output_dir: "./results"
+  build_dir: "../build/estimators"
+
+  save: ["stats"] 
+
+datasets:
+  - name: "implicit"
+    dir: "dataset_implicit"
+    extension: ".pts"
+    pattern: ["goursat_25000", "goursat_50000", "goursat_75000", "goursat_100000"]
+
+jobs:
+  
+  - name: "implicit_convergence"
+    executable: "compute_ponca_estimators"
+    
+    static_args:
+      --stats: ""
+      --unsigned-curvature: ""
+      --seed: 1
+      # --abs: ""            # Erreur absolue if needed
+
+    noise_grid:
+      --noise-position: [0.0, 0.015]    
+    
+    grid:
+      -e: ["3DQuadric", "PC-MLS", "2-Monge", "Varifolds","VarifoldsMeanPlane", "WaveJets", "AvgHexagram", "ShapeOperator", "PCA", "ASO", "APSS", "Sphere", "UnorientedSphere", "Cov2D", "NormCov2D", "NormCov3D", "Mean"]
+      -r: [0.075]
+      --mls-iter: [1]
+      --kernel: ["smooth"]
+
+  - name: "implicit_convergence"
+    executable: "compute_jetfitting"
+    method_label: "JetFitting"
+
+    static_args:
+      --stats: ""
+      --seed: 1
+      # --abs: ""
+
+    noise_grid:
+      --noise-position: [0.0, 0.015]
+
+    grid:
+      -r: [0.075]

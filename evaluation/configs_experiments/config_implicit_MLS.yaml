@@ -1,0 +1,124 @@
+global:
+  dataset_dir: "../datasets"
+  output_dir: "./results"
+  build_dir: "../build/estimators"
+  
+  save: ["stats"] 
+
+datasets:
+  - name: "implicit"
+    dir: "dataset_implicit"
+    extension: ".pts"
+    # pattern: ["goursat_50000"]
+    pattern: ["*_50000"]
+    
+jobs:
+  
+  - name: "implicit_MLS/1_MLS"
+    executable: "compute_ponca_estimators"
+
+    static_args:
+      --stats: ""
+      --unsigned-curvature: ""
+      --seed: 1
+
+    grid:
+      -e: ["PC-MLS", "ASO", "APSS", "Sphere", "UnorientedSphere"]
+      -r: [0.1]
+      --mls-iter: [1]
+      --kernel: ["smooth"]
+
+    noise_grid:
+      --noise-position: [0.0, 0.01]
+      --noise-normal: [0.0, 0.1]
+
+  - name: "implicit_MLS/2_MLS"
+    executable: "compute_ponca_estimators"
+
+    static_args:
+      --stats: ""
+      --unsigned-curvature: ""
+      --seed: 1
+
+    grid:
+      -e: ["PC-MLS", "ASO", "APSS", "Sphere", "UnorientedSphere"]
+      -r: [0.1]
+      --mls-iter: [2]
+      --kernel: ["smooth"]
+
+    noise_grid:
+      --noise-position: [0.0, 0.01]
+      --noise-normal: [0.0, 0.1]
+
+  - name: "implicit_MLS/3_MLS"
+    executable: "compute_ponca_estimators"
+
+    static_args:
+      --stats: ""
+      --unsigned-curvature: ""
+      --seed: 1
+
+    grid:
+      -e: ["PC-MLS", "ASO", "APSS", "Sphere", "UnorientedSphere"]
+      -r: [0.1]
+      --mls-iter: [3]
+      --kernel: ["smooth"]
+
+    noise_grid:
+      --noise-position: [0.0, 0.01]
+      --noise-normal: [0.0, 0.1]
+
+  - name: "implicit_MLS/4_MLS"
+    executable: "compute_ponca_estimators"
+
+    static_args:
+      --stats: ""
+      --unsigned-curvature: ""
+      --seed: 1
+
+    grid:
+      -e: ["PC-MLS", "ASO", "APSS", "Sphere", "UnorientedSphere"]
+      -r: [0.1]
+      --mls-iter: [4]
+      --kernel: ["smooth"]
+
+    noise_grid:
+      --noise-position: [0.0, 0.01]
+      --noise-normal: [0.0, 0.1]
+
+  - name: "implicit_MLS/5_MLS"
+    executable: "compute_ponca_estimators"
+
+    static_args:
+      --stats: ""
+      --unsigned-curvature: ""
+      --seed: 1
+
+    grid:
+      -e: ["PC-MLS", "ASO", "APSS", "Sphere", "UnorientedSphere"]
+      -r: [0.1]
+      --mls-iter: [5]
+      --kernel: ["smooth"]
+
+    noise_grid:
+      --noise-position: [0.0, 0.01]
+      --noise-normal: [0.0, 0.1]
+
+
+  - name: "implicit_MLS/6_MLS"
+    executable: "compute_ponca_estimators"
+
+    static_args:
+      --stats: ""
+      --unsigned-curvature: ""
+      --seed: 1
+
+    grid:
+      -e: ["PC-MLS", "ASO", "APSS", "Sphere", "UnorientedSphere"]
+      -r: [0.1]
+      --mls-iter: [6]
+      --kernel: ["smooth"]
+
+    noise_grid:
+      --noise-position: [0.0, 0.01]
+      --noise-normal: [0.0, 0.1]
