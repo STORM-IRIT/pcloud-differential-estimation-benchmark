@@ -1,0 +1,40 @@
+global:
+  dataset_dir: "../datasets"
+  output_dir: "./results"
+  build_dir: "../build/estimators"
+  save: ["stats"] 
+
+datasets:
+  - name: "PCPNet"
+    dir: "PCPNet_rescaled"
+    extension: ".pts"
+    lists: ["list/testset_no_noise.txt", "list/testset_low_noise.txt", "list/testset_med_noise.txt", "list/testset_high_noise.txt", "list/testset_vardensity_gradient.txt", "list/testset_vardensity_striped.txt"]
+
+jobs:
+  
+  - name: "PCPNet"
+    executable: "compute_ponca_estimators"
+    
+    static_args:
+      --stats: ""
+      --unsigned-curvature: ""
+      --seed: 1
+      # --abs: ""            # absolute error if needed
+    
+    grid:
+      -e: ["3DQuadric", "PC-MLS", "2-Monge", "Varifolds","VarifoldsMeanPlane", "WaveJets", "AvgHexagram", "ShapeOperator", "PCA", "ASO", "APSS", "Sphere", "UnorientedSphere", "Cov2D", "NormCov2D", "NormCov3D", "Mean"]
+      -k: [75, 150, 700]
+      --mls-iter: [1]
+      --kernel: ["smooth"]
+
+  - name: "PCPNet"
+    executable: "compute_jetfitting"
+    method_label: "JetFitting"
+
+    static_args:
+      --stats: ""
+      --seed: 1
+      # --abs: ""
+
+    grid:
+      -k: [75, 150, 700]

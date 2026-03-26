@@ -1,0 +1,29 @@
+global:
+  bin_path: "../build/tools/displayPTS2"
+  input_root: "./results"
+  output_root: "./screenshots2"
+  camera_dir: "../eval/cameras"
+
+jobs:
+  - name: "churches/estimations"
+    input_subdir: "outdoors/churches/estimation"
+    
+    pattern: ["*/bildstein*.pts", "*/stgallencathedral*.pts"]
+    
+    is_error: false
+    vector_as_color: true
+    bounds: [-1.0, 1.0]
+    properties: ["kMean", "Normal"]
+    cameras: ["auto"]
+
+  - name: "pipes/estimations"
+    input_subdir: "outdoors/pipes/estimation"
+    
+    pattern: ["*/*Area_1_Site_1*.pts", "*/*Area_1_Site_2_part_1*.pts"]
+    
+    is_error: false
+    vector_as_color: true
+    bounds: [-10.0, 10.0]
+    properties: ["kMean", "Normal"]
+    cameras: ["auto"]
+    
